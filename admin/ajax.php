@@ -331,19 +331,23 @@ if (!isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] == '') {
         )
     })
     $("#listaddPost").click(function () {
-        var eventname = $("input[name='eventname']").val();
-        var icon = $("input[name='icon']").val();
-        var img = $("input[name='img']").val();
+        var formData = new FormData();
+        formData.append('eventname', $("input[name='eventname']").val());
+        formData.append('icon', $("input[name='icon']").val());
+        formData.append('img', $("input[name='img']").val());
+        
+        var fileInput = $('#imgFile')[0];
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append('imgFile', fileInput.files[0]);
+        }
 
         $.ajax({
             url: "listaddPost.php",
-            data: {
-                eventname: eventname,
-                icon: icon,
-                img: img,
-            },
+            data: formData,
             type: "POST",
             dataType: "text",
+            processData: false,
+            contentType: false,
             success: function (res) {
                 if (res == 1) {
                     toastr["success"]("新增事件成功！", "Like_Girl");
@@ -352,6 +356,8 @@ if (!isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] == '') {
                     setInterval("window.location.href='lovelist.php'", 1000);
                 } else if (res == 0) {
                     toastr["error"]("新增事件失败！", "Like_Girl");
+                } else {
+                    toastr["error"]("操作失败: " + res, "Like_Girl");
                 }
             },
             error: function (err) {

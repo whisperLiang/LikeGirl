@@ -41,9 +41,12 @@ include_once 'Nav.php';
                                data-off-label="No"></label>
                     </div>
                     <div class="form-group mb-3" id="img_url">
-                        <label for="validationCustom01"></label>
+                        <label for="validationCustom01">图片地址 (如果上传图片，此项可留空)</label>
                         <input type="text" name="img" class="form-control" id="validationCustom01"
                                placeholder="请输入图片地址（没有无需填写）" value="">
+                        
+                        <label for="imgFile" class="mt-3">上传图片</label>
+                        <input type="file" name="imgFile" id="imgFile" class="form-control-file">
                     </div>
                     <div class="form-group mb-3 text_right">
                         <button class="btn btn-primary" type="button" id="listaddPost">提交修改</button>
