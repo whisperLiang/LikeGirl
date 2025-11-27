@@ -46,9 +46,12 @@ $imgurl = $_GET['imgurl'];
                     </div>
                     <div class="form-group mb-3" id="img_url"
                          style="display: <?php if ($icon) { ?> block<?php } else { ?>none<?php } ?>">
-                        <label for="validationCustom01">图片地址</label>
+                        <label for="validationCustom01">图片地址 (如果上传图片，此项可留空)</label>
                         <input type="text" name="imgurl" class="form-control" id="validationCustom01"
                                placeholder="请输入图片地址（没有无需填写）" value="<?php echo $imgurl ?>">
+                        
+                        <label for="imgFile" class="mt-3">上传图片</label>
+                        <input type="file" name="imgFile" id="imgFile" class="form-control-file">
                     </div>
                     <div class="form-group mb-3 text_right">
                         <input name="id" value="<?php echo $id ?>" type="hidden">
