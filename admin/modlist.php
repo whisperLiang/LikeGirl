@@ -46,11 +46,23 @@ $imgurl = $_GET['imgurl'];
                     </div>
                     <div class="form-group mb-3" id="img_url"
                          style="display: <?php if ($icon) { ?> block<?php } else { ?>none<?php } ?>">
-                        <label for="validationCustom01">图片地址 (如果上传图片，此项可留空)</label>
-                        <input type="text" name="imgurl" class="form-control" id="validationCustom01"
-                               placeholder="请输入图片地址（没有无需填写）" value="<?php echo $imgurl ?>">
+                        <label for="validationCustom01">现有图片</label>
+                        <div class="mb-2">
+                             <?php 
+                                $imgSrc = $imgurl;
+                                if ($imgSrc && strpos($imgSrc, 'http') !== 0 && strpos($imgSrc, '//') !== 0) {
+                                    $imgSrc = '../' . $imgSrc;
+                                }
+                             ?>
+                             <?php if ($imgSrc): ?>
+                             <img src="<?php echo $imgSrc ?>" style="max-width: 100%; max-height: 300px; border-radius: 5px; box-shadow: 0 0 5px #ccc;" alt="现有图片">
+                             <?php else: ?>
+                             <p>暂无图片</p>
+                             <?php endif; ?>
+                        </div>
+                        <input type="hidden" name="imgurl" value="<?php echo $imgurl ?>">
                         
-                        <label for="imgFile" class="mt-3">上传图片</label>
+                        <label for="imgFile" class="mt-3">上传图片 (如果上传图片，将覆盖原有图片)</label>
                         <input type="file" name="imgFile" id="imgFile" class="form-control-file">
                     </div>
                     <div class="form-group mb-3 text_right">
