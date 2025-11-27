@@ -26,6 +26,7 @@ $resImg = mysqli_query($connect, $loveImg);
                         <th>序号</th>
                         <th>图片描述</th>
                         <th>日期</th>
+                        <th>图片预览</th>
                         <th style="width:150px;">操作</th>
                     </tr>
                     </thead>
@@ -45,6 +46,14 @@ $resImg = mysqli_query($connect, $loveImg);
                             </td>
                             <td><?php echo $list['imgText'] ?></td>
                             <td><?php echo $list['imgDatd'] ?></td>
+                            <td><?php if ($list['imgUrl']) { 
+                                $imgSrc = $list['imgUrl'];
+                                if ($imgSrc && strpos($imgSrc, 'http') !== 0 && strpos($imgSrc, '//') !== 0) {
+                                    $imgSrc = '../' . $imgSrc;
+                                }
+                            ?> 
+                            <img src="<?php echo $imgSrc ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;" alt="预览">
+                            <?php } else { ?>暂无图片 <?php } ?></td>
                             <td>
                                 <a href="modImg.php?id=<?php echo $list['id'] ?>">
                                     <button type="button" class="btn btn-secondary btn-rounded">
