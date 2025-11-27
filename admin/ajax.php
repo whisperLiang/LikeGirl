@@ -263,21 +263,24 @@ if (!isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] == '') {
         )
     })
     $("#ImgUpdaPost").click(function () {
-        var imgDatd = $("input[name='imgDatd']").val();
-        var imgText = $("input[name='imgText']").val();
-        var id = $("input[name='id']").val();
-        var imgUrl = $("input[name='imgUrl']").val();
+        var formData = new FormData();
+        formData.append('imgDatd', $("input[name='imgDatd']").val());
+        formData.append('imgText', $("input[name='imgText']").val());
+        formData.append('id', $("input[name='id']").val());
+        formData.append('imgUrl', $("input[name='imgUrl']").val());
+
+        var fileInput = $('#imgFile')[0];
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append('imgFile', fileInput.files[0]);
+        }
 
         $.ajax({
             url: "ImgUpdaPost.php",
-            data: {
-                imgDatd: imgDatd,
-                imgText: imgText,
-                imgUrl: imgUrl,
-                id: id,
-            },
+            data: formData,
             type: "POST",
             dataType: "text",
+            processData: false,
+            contentType: false,
             success: function (res) {
                 if (res == 1) {
                     toastr["success"]("相册修改成功！", "Like_Girl");
@@ -286,6 +289,8 @@ if (!isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] == '') {
                     setInterval("window.location.href='loveImgSet.php'", 1000);
                 } else if (res == 0) {
                     toastr["error"]("相册修改失败！", "Like_Girl");
+                } else {
+                    toastr["error"]("操作失败: " + res, "Like_Girl");
                 }
             },
             error: function (err) {

@@ -32,6 +32,11 @@ $Imglist = mysqli_fetch_array($resImg);
                         <label for="validationCustom01">图片URL</label>
                         <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo $Imglist['imgUrl'] ?>" required>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label for="imgFile">上传图片 (如果上传图片，将覆盖原有图片)</label>
+                        <input type="file" name="imgFile" id="imgFile" class="form-control-file">
+                    </div>
                     <div class="form-group mb-3 text_right">
                         <input name="id" value="<?php echo $id ?>" type="hidden">
                         <button class="btn btn-primary" type="button" id="ImgUpdaPost">新增相册</button>
