@@ -29,8 +29,17 @@ $Imglist = mysqli_fetch_array($resImg);
                     </div>
 
                     <div class="form-group mb-3" id="img_url">
-                        <label for="validationCustom01">图片URL</label>
-                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo $Imglist['imgUrl'] ?>" required>
+                        <label for="validationCustom01">现有图片</label>
+                        <div class="mb-2">
+                             <?php 
+                                $imgSrc = $Imglist['imgUrl'];
+                                if (strpos($imgSrc, 'http') !== 0 && strpos($imgSrc, '//') !== 0) {
+                                    $imgSrc = '../' . $imgSrc;
+                                }
+                             ?>
+                             <img src="<?php echo $imgSrc ?>" style="max-width: 100%; max-height: 300px; border-radius: 5px; box-shadow: 0 0 5px #ccc;" alt="现有图片">
+                        </div>
+                        <input type="hidden" name="imgUrl" value="<?php echo $Imglist['imgUrl'] ?>">
                     </div>
 
                     <div class="form-group mb-3">
