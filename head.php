@@ -29,7 +29,7 @@ if (mysqli_num_rows($result)) {
 }
 
 $copy = $text['Copyright'];
-$icp = $text['icp'];
+$icp = ""; // $text['icp'];
 $Animation = $text['Animation'];
 ?>
 
